@@ -119,8 +119,8 @@ function AdminDashboard() {
             <Confetti size={24} weight="fill" color="white" />
           </div>
           <div>
-            <h2 className={styles.welcomeTitle}>Selamat Datang kembali, Admin HR! 👋</h2>
-            <p className={styles.welcomeSub}>Berikut ringkasan data penggajian terbaru Anda.</p>
+            <h2 className={styles.welcomeTitle}>Ikhtisar Dashboard HR 👋</h2>
+            <p className={styles.welcomeSub}>Berikut adalah ringkasan absensi dan penggajian seluruh karyawan.</p>
           </div>
         </div>
         <div className={styles.welcomePeriod}>
