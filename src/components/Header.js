@@ -158,23 +158,25 @@ export default function Header({ toggleSidebar }) {
 
   return (
     <header className={styles.header}>
-      <div className={styles.leftSection}>
+      <div className={styles.leftWrapper}>
         <button className={styles.mobileMenuBtn} onClick={toggleSidebar}>
           <List size={24} weight="bold" />
         </button>
-        <div className={styles.breadcrumb}>
-          <span className={styles.breadcrumbHome}>NexPay</span>
-          {breadcrumb.map((crumb, i) => (
-            <span key={i} className={styles.breadcrumbItem}>
-              <CaretRight size={12} className={styles.breadcrumbSep} />
-              <span className={i === breadcrumb.length - 1 ? styles.breadcrumbActive : styles.breadcrumbLink}>
-                {crumb.label}
+        <div className={styles.headerLeft}>
+          <div className={styles.breadcrumb}>
+            <span className={styles.breadcrumbHome}>NexPay</span>
+            {breadcrumb.map((crumb, i) => (
+              <span key={i} className={styles.breadcrumbItem}>
+                <CaretRight size={12} className={styles.breadcrumbSep} />
+                <span className={i === breadcrumb.length - 1 ? styles.breadcrumbActive : styles.breadcrumbLink}>
+                  {crumb.label}
+                </span>
               </span>
-            </span>
-          ))}
+            ))}
+          </div>
+          <h1 className={styles.pageTitle}>{getPageTitle()}</h1>
+          <p className={styles.pageDate}>{time ? `${dateStr} • ${timeStr}` : 'Memuat waktu...'}</p>
         </div>
-        <h1 className={styles.pageTitle}>{getPageTitle()}</h1>
-        <p className={styles.pageDate}>{time ? `${dateStr} • ${timeStr}` : 'Memuat waktu...'}</p>
       </div>
 
       <div className={styles.headerActions}>

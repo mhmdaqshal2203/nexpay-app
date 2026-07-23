@@ -19,6 +19,12 @@
   background: rgba(240, 244, 255, 0.85);
 }
 
+.leftWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
 .headerLeft {
   display: flex;
   flex-direction: column;
@@ -93,6 +99,10 @@
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
+  .leftWrapper {
+    gap: 0.75rem;
+  }
+  
   .mobileMenuBtn {
     display: flex;
     align-items: center;
@@ -101,10 +111,6 @@
   
   .searchBar {
     display: none; /* Hide search bar on small screens to save space */
-  }
-  
-  .leftSection {
-    gap: 0.5rem;
   }
 }
 
