@@ -8,8 +8,13 @@ import { CalendarCheck, Clock, CheckCircle, MapPin } from '@phosphor-icons/react
 
 function EmployeeAttendanceView() {
   const { user } = useAuth();
+  const { employees } = useEmployees();
   const { attendances, checkIn, checkOut } = useActivity();
   const [time, setTime] = useState(null);
+
+  const initialEmployeeData = user?.employee || {};
+  const employeeData = employees?.find(emp => emp.id === initialEmployeeData.id) || initialEmployeeData;
+  const isNonaktif = employeeData.status === 'Nonaktif';
 
   const todayRecord = attendances.find(a =>
     (a.employeeId === user?.id || a.employeeId === user?.employee?.id || a.employeeId === user?.username) &&
@@ -69,9 +74,15 @@ function EmployeeAttendanceView() {
           )}
 
           <div style={{ display: 'flex', gap: '1rem', width: '100%', marginTop: '1.5rem' }}>
-            {!hasCheckedIn && (
-              <button
-                onClick={handleCheckIn}
+            {isNonaktif ? (
+              <div style={{ width: '100%', padding: '1rem', borderRadius: '12px', background: 'rgba(244, 63, 94, 0.1)', border: '1px solid var(--danger)', color: 'var(--danger)', textAlign: 'center', fontWeight: 'bold' }}>
+                Akun Anda dinonaktifkan. Anda tidak dapat melakukan absensi.
+              </div>
+            ) : (
+              <>
+                {!hasCheckedIn && (
+                  <button
+                    onClick={handleCheckIn}
                 style={{
                   flex: 1, padding: '1rem', borderRadius: '12px', border: 'none',
                   background: 'linear-gradient(135deg, var(--primary), var(--secondary))',
@@ -101,6 +112,8 @@ function EmployeeAttendanceView() {
                 <Clock size={24} weight="bold" />
                 {(!isAfter1700) ? 'Bisa Keluar Mulai 17:00' : 'Absen Keluar Sekarang'}
               </button>
+            )}
+              </>
             )}
           </div>
         </div>

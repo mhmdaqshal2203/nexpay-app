@@ -9,8 +9,13 @@ import styles from './Leave.module.css';
 
 function EmployeeLeaveView() {
   const { user } = useAuth();
+  const { employees } = useEmployees();
   const { leaves, submitLeave } = useActivity();
   
+  const initialEmployeeData = user?.employee || {};
+  const employeeData = employees?.find(emp => emp.id === initialEmployeeData.id) || initialEmployeeData;
+  const isNonaktif = employeeData.status === 'Nonaktif';
+
   const [form, setForm] = useState({
     type: 'Cuti Tahunan',
     startDate: '',
@@ -20,6 +25,7 @@ function EmployeeLeaveView() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (isNonaktif) return alert('Akun Anda dinonaktifkan. Anda tidak dapat mengajukan cuti.');
     if (!form.startDate || !form.endDate || !form.reason) return alert('Lengkapi semua data!');
     
     submitLeave(user, form);
@@ -131,9 +137,9 @@ function EmployeeLeaveView() {
               </div>
             </div>
 
-            <button type="submit" className={styles.submitBtn}>
+            <button type="submit" className={styles.submitBtn} disabled={isNonaktif} style={{ opacity: isNonaktif ? 0.5 : 1, cursor: isNonaktif ? 'not-allowed' : 'pointer' }}>
               <PaperPlaneRight size={20} weight="fill" />
-              Ajukan Cuti Sekarang
+              {isNonaktif ? 'Akun Dinonaktifkan' : 'Ajukan Cuti Sekarang'}
             </button>
           </form>
         </div>
