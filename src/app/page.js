@@ -216,13 +216,13 @@ function AdminDashboard() {
           <div className={styles.chartContainer}>
             {attendanceData.length > 0 ? (
               <ResponsiveContainer width="100%" height="100%">
-                <PieChart margin={{ top: 0, right: 0, left: 0, bottom: 20 }}>
+                <PieChart margin={{ top: 20, right: 0, left: 0, bottom: 20 }}>
                   <Pie
                     data={attendanceData}
                     cx="50%"
-                    cy="50%"
-                    innerRadius={70}
-                    outerRadius={110}
+                    cy="45%"
+                    innerRadius={60}
+                    outerRadius={90}
                     paddingAngle={5}
                     dataKey="value"
                     stroke="none"
