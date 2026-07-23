@@ -237,6 +237,17 @@
   min-height: 250px;
 }
 
+@media (max-width: 768px) {
+  .chartCard {
+    height: auto;
+    min-height: 380px;
+  }
+  .chartContainer {
+    padding: 0; /* Remove asymmetric padding on mobile */
+    min-height: 280px;
+  }
+}
+
 .emptyChart {
   display: flex;
   align-items: center;
