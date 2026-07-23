@@ -224,10 +224,9 @@ function AdminPayslipView() {
   const [previewSlip, setPreviewSlip] = useState(null);
 
   const handleGenerateAll = async () => {
-    // Sort employees to ensure deterministic order (e.g., by ID or Name)
-    const sortedEmployees = [...employees].sort((a, b) => a.id.localeCompare(b.id));
-
-    const bulkData = sortedEmployees.map(emp => {
+    // Preserve the original order of employees (typically by createdAt)
+    // Muhammad Aqshal is first, Ali Fadli is second, etc.
+    const bulkData = employees.map(emp => {
       const allowance = emp.salary * 0.20;
       const gross = emp.salary + allowance;
       const deduction = Math.round(gross * 0.05);
