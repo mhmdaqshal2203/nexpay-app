@@ -369,3 +369,8 @@
   gap: 0.875rem;
   margin-top: 0.5rem;
 }
+
+/* ==================== LIGHT THEME OVERRIDES ==================== */
+:global([data-theme="light"]) .calcRow {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}

@@ -18,18 +18,16 @@
 }
 
 .modal {
-  background: rgba(10, 14, 26, 0.95);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--glass-bg);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  border: 1px solid var(--glass-border);
   border-radius: 20px;
   width: 100%;
   max-width: 540px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow:
-    0 32px 80px rgba(0, 0, 0, 0.6),
-    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  box-shadow: var(--glass-shadow);
   position: relative;
   overflow: hidden;
 }
@@ -85,4 +83,10 @@
   padding: 1.5rem;
   overflow-y: auto;
   max-height: calc(90vh - 80px);
+}
+
+/* ==================== LIGHT THEME OVERRIDES ==================== */
+:global([data-theme="light"]) .closeBtn {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.1);
 }
