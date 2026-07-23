@@ -70,6 +70,15 @@ function AdminDashboard() {
 
   const COLORS = ['#10B981', '#F59E0B', '#EF4444', '#6366F1', '#8B5CF6', '#EC4899']; // Color palette
 
+  const STATUS_COLORS = {
+    'Hadir': '#10B981',      // Green
+    'Terlambat': '#EF4444',  // Red
+    'Sakit': '#F59E0B',      // Amber
+    'Izin': '#6366F1',       // Indigo
+    'Alpha': '#374151'       // Gray
+  };
+  const getStatusColor = (status, index) => STATUS_COLORS[status] || COLORS[index % COLORS.length];
+
   const statCards = [
     {
       label: 'Total Karyawan',
@@ -228,7 +237,7 @@ function AdminDashboard() {
                     stroke="none"
                   >
                     {attendanceData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                      <Cell key={`cell-${index}`} fill={getStatusColor(entry.name, index)} />
                     ))}
                   </Pie>
                   <RechartsTooltip 
