@@ -47,6 +47,6 @@ export async function POST(request) {
     return NextResponse.json({ error: 'Username atau password salah!' }, { status: 401 });
   } catch (error) {
     console.error('Login error:', error);
-    return NextResponse.json({ error: 'Login failed' }, { status: 500 });
+    return NextResponse.json({ error: `DB Error: ${error.message}` }, { status: 500 });
   }
 }
