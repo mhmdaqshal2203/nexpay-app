@@ -221,8 +221,8 @@ function AdminDashboard() {
                     data={attendanceData}
                     cx="50%"
                     cy="50%"
-                    innerRadius={65}
-                    outerRadius={100}
+                    innerRadius="55%"
+                    outerRadius="80%"
                     paddingAngle={5}
                     dataKey="value"
                     stroke="none"
