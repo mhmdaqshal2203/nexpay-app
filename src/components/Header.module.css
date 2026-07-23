@@ -118,43 +118,35 @@
   }
   
   .searchInput {
-    width: 36px;
-    height: 36px;
-    padding: 0;
-    border-radius: 50%;
-    color: transparent;
-    cursor: pointer;
-    background: transparent;
-    border-color: transparent;
+    width: 110px;
+    height: auto;
+    padding: 0.4rem 0.4rem 0.4rem 1.7rem;
+    font-size: 0.75rem;
+    border-radius: 8px;
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--glass-border);
+    cursor: text;
   }
   
   .searchInput::placeholder {
-    color: transparent;
+    color: var(--text-muted);
   }
   
   .searchInput:focus {
-    width: 180px;
-    border-radius: 10px;
-    padding: 0.5rem 1rem 0.5rem 2.2rem;
-    color: var(--text-primary);
-    background: rgba(7, 9, 15, 0.95);
-    border-color: rgba(124, 58, 237, 0.4);
-    position: absolute;
-    right: 0;
-    z-index: 100;
+    width: 130px;
+    padding: 0.4rem 0.4rem 0.4rem 1.7rem;
+    border-radius: 8px;
+    position: static;
   }
   
   :global([data-theme="light"]) .searchInput:focus {
     background: #ffffff;
   }
   
-  .searchInput:focus::placeholder {
-    color: var(--text-muted);
-  }
-  
   .searchIcon {
-    left: 10px;
-    z-index: 101;
+    left: 0.5rem;
+    z-index: 2;
   }
   
   .searchKbd {
@@ -167,7 +159,11 @@
   }
   
   .headerActions {
-    gap: 0.5rem;
+    gap: 0.4rem;
+  }
+  
+  .userInfo {
+    display: none; /* Hide username/role text on mobile to save space */
   }
 }
 
