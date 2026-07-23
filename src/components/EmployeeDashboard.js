@@ -54,9 +54,9 @@ export default function EmployeeDashboard() {
             <p className={styles.welcomeSub}>{employeeData.position} • {employeeData.id}</p>
           </div>
         </div>
-        <div className={styles.statusBadge}>
-          <div className={styles.statusDot}></div>
-          Status: Aktif Bekerja
+        <div className={`${styles.statusBadge} ${employeeData.status === 'Nonaktif' ? styles.statusBadgeNonaktif : ''}`}>
+          <div className={`${styles.statusDot} ${employeeData.status === 'Nonaktif' ? styles.statusDotNonaktif : ''}`}></div>
+          Status: {employeeData.status === 'Nonaktif' ? 'Nonaktif' : 'Aktif Bekerja'}
         </div>
       </div>
 

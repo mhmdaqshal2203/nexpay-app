@@ -87,6 +87,17 @@
   animation: pulse 2s infinite;
 }
 
+.statusBadgeNonaktif {
+  background: rgba(244, 63, 94, 0.15);
+  border: 1px solid rgba(244, 63, 94, 0.3);
+  color: var(--danger);
+}
+
+.statusDotNonaktif {
+  background-color: var(--danger);
+  box-shadow: 0 0 10px var(--danger);
+}
+
 .statsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
