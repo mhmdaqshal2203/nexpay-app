@@ -274,8 +274,8 @@
   animation: notifPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), badgePulse 2s infinite;
 }
 
-.hasUnread svg {
-  animation: bellRing 3s infinite;
+.notifBtn:hover svg {
+  animation: bellRing 1s ease-in-out;
   transform-origin: top center;
 }
 
