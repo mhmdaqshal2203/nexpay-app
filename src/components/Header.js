@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { MagnifyingGlass, Bell, CaretRight, SignOut, Sun, Moon, X, CheckCircle, Clock, Warning, Receipt, List } from '@phosphor-icons/react';
 import { useAuth } from '@/context/AuthContext';
 import { useTheme } from '@/context/ThemeContext';
@@ -281,13 +282,13 @@ export default function Header({ toggleSidebar }) {
 
         {/* User Profile */}
         {user && (
-          <div className={styles.userProfile}>
+          <Link href="/settings" className={styles.userProfile} title="Lihat Profil">
             <img src={user.avatar} alt={user.username} className={styles.userAvatar} />
             <div className={styles.userInfo}>
               <span className={styles.userName}>{user.username}</span>
               <span className={styles.userRole}>{user.role}</span>
             </div>
-          </div>
+          </Link>
         )}
 
         {/* Logout */}
