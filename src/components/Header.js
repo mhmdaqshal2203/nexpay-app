@@ -206,7 +206,7 @@ export default function Header({ toggleSidebar }) {
         {/* Notification */}
         <div className={styles.notifWrapper} ref={notifRef}>
           <button
-            className={`btn-icon ${styles.notifBtn} ${notifOpen ? styles.notifBtnActive : ''}`}
+            className={`btn-icon ${styles.notifBtn} ${notifOpen ? styles.notifBtnActive : ''} ${unreadCount > 0 ? styles.hasUnread : ''}`}
             id="notif-btn"
             onClick={() => setNotifOpen(o => !o)}
             aria-label="Notifikasi"
