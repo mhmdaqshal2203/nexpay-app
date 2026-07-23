@@ -638,8 +638,8 @@
   background: rgba(244, 63, 94, 0.2);
   border-color: rgba(244, 63, 94, 0.4);
   box-shadow: 0 0 15px var(--danger-glow);
-  transform: translateY(-1px);
+  transform: scale(1.12);
 }
 .logoutBtn:active {
-  transform: translateY(1px);
+  transform: scale(0.95);
 }

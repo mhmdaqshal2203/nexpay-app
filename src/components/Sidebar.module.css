@@ -337,4 +337,5 @@
 .logoutBtn:hover {
   color: var(--danger);
   background: rgba(244, 63, 94, 0.1);
+  transform: scale(1.2);
 }
