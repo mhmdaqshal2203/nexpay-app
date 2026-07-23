@@ -4,7 +4,8 @@ import { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useEmployees } from '@/context/EmployeeContext';
 import { useActivity } from '@/context/ActivityContext';
-import { AirplaneTilt, CalendarPlus, WarningCircle, CheckCircle, Clock } from '@phosphor-icons/react';
+import { AirplaneTilt, CalendarPlus, WarningCircle, CheckCircle, Clock, ListBullets, CalendarBlank, TextAa, PaperPlaneRight, CaretDown } from '@phosphor-icons/react';
+import styles from './Leave.module.css';
 
 function EmployeeLeaveView() {
   const { user } = useAuth();
@@ -68,55 +69,71 @@ function EmployeeLeaveView() {
           <h3 className="section-title">Form Pengajuan Cuti</h3>
           <p className="section-subtitle" style={{ marginBottom: '1.5rem' }}>Isi form berikut untuk mengajukan cuti.</p>
           
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              <label style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: '600' }}>Jenis Cuti</label>
-              <select 
-                value={form.type} onChange={(e) => setForm({...form, type: e.target.value})}
-                style={{ padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--glass-border)', background: 'var(--surface-2)', color: 'white', outline: 'none' }}
-              >
-                <option>Cuti Tahunan</option>
-                <option>Izin Sakit</option>
-                <option>Cuti Melahirkan</option>
-                <option>Izin Keperluan Pribadi</option>
-              </select>
+          <form onSubmit={handleSubmit} className={styles.formContainer}>
+            
+            {/* Jenis Cuti */}
+            <div className={styles.inputGroup}>
+              <label className={styles.label}>
+                Jenis Cuti
+              </label>
+              <div className={styles.inputWrapper}>
+                <select 
+                  value={form.type} onChange={(e) => setForm({...form, type: e.target.value})}
+                  className={`${styles.input} ${styles.select}`}
+                >
+                  <option>Cuti Tahunan</option>
+                  <option>Izin Sakit</option>
+                  <option>Cuti Melahirkan</option>
+                  <option>Izin Keperluan Pribadi</option>
+                </select>
+                <ListBullets size={18} weight="bold" className={styles.inputIcon} />
+                <CaretDown size={16} weight="bold" style={{ position: 'absolute', right: '1rem', pointerEvents: 'none', color: 'var(--text-muted)' }} />
+              </div>
             </div>
             
+            {/* Tanggal */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                <label style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: '600' }}>Tanggal Mulai</label>
-                <input 
-                  type="date" 
-                  value={form.startDate} onChange={(e) => setForm({...form, startDate: e.target.value})}
-                  style={{ padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--glass-border)', background: 'var(--surface-2)', color: 'white', outline: 'none' }}
-                />
+              <div className={styles.inputGroup}>
+                <label className={styles.label}>Tanggal Mulai</label>
+                <div className={styles.inputWrapper}>
+                  <input 
+                    type="date" 
+                    value={form.startDate} onChange={(e) => setForm({...form, startDate: e.target.value})}
+                    className={styles.input}
+                  />
+                  <CalendarBlank size={18} weight="bold" className={styles.inputIcon} />
+                </div>
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                <label style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: '600' }}>Tanggal Selesai</label>
-                <input 
-                  type="date" 
-                  value={form.endDate} onChange={(e) => setForm({...form, endDate: e.target.value})}
-                  style={{ padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--glass-border)', background: 'var(--surface-2)', color: 'white', outline: 'none' }}
+              <div className={styles.inputGroup}>
+                <label className={styles.label}>Tanggal Selesai</label>
+                <div className={styles.inputWrapper}>
+                  <input 
+                    type="date" 
+                    value={form.endDate} onChange={(e) => setForm({...form, endDate: e.target.value})}
+                    className={styles.input}
+                  />
+                  <CalendarBlank size={18} weight="bold" className={styles.inputIcon} />
+                </div>
+              </div>
+            </div>
+
+            {/* Alasan */}
+            <div className={styles.inputGroup}>
+              <label className={styles.label}>
+                Keterangan / Alasan
+              </label>
+              <div className={styles.inputWrapper}>
+                <textarea 
+                  value={form.reason} onChange={(e) => setForm({...form, reason: e.target.value})}
+                  placeholder="Tuliskan alasan detail pengajuan cuti Anda..."
+                  className={`${styles.input} ${styles.textarea}`}
                 />
               </div>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              <label style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: '600' }}>Keterangan / Alasan</label>
-              <textarea 
-                rows="3"
-                value={form.reason} onChange={(e) => setForm({...form, reason: e.target.value})}
-                placeholder="Tuliskan alasan pengajuan cuti Anda..."
-                style={{ padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--glass-border)', background: 'var(--surface-2)', color: 'white', outline: 'none', resize: 'none' }}
-              />
-            </div>
-
-            <button type="submit" style={{ 
-              marginTop: '1rem', padding: '0.75rem', borderRadius: '8px', border: 'none',
-              background: 'linear-gradient(135deg, var(--primary), var(--secondary))', color: 'white', fontWeight: 'bold',
-              cursor: 'pointer', transition: 'all 0.2s', boxShadow: '0 4px 15px var(--primary-glow)'
-            }}>
-              Ajukan Sekarang
+            <button type="submit" className={styles.submitBtn}>
+              <PaperPlaneRight size={20} weight="fill" />
+              Ajukan Cuti Sekarang
             </button>
           </form>
         </div>
