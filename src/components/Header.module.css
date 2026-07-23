@@ -390,7 +390,12 @@
 }
 
 .notifRead {
-  opacity: 0.55;
+  opacity: 1;
+}
+
+.notifRead .notifIcon {
+  opacity: 0.5;
+  filter: grayscale(0.5);
 }
 
 /* Icon per type */
