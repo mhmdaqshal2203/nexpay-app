@@ -114,16 +114,47 @@
   
   .searchWrapper {
     display: flex;
+    position: relative;
   }
   
   .searchInput {
-    width: 130px;
-    padding: 0.5rem 0.5rem 0.5rem 2rem;
-    font-size: 0.75rem;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border-radius: 50%;
+    color: transparent;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+  }
+  
+  .searchInput::placeholder {
+    color: transparent;
   }
   
   .searchInput:focus {
-    width: 160px;
+    width: 180px;
+    border-radius: 10px;
+    padding: 0.5rem 1rem 0.5rem 2.2rem;
+    color: var(--text-primary);
+    background: rgba(7, 9, 15, 0.95);
+    border-color: rgba(124, 58, 237, 0.4);
+    position: absolute;
+    right: 0;
+    z-index: 100;
+  }
+  
+  :global([data-theme="light"]) .searchInput:focus {
+    background: #ffffff;
+  }
+  
+  .searchInput:focus::placeholder {
+    color: var(--text-muted);
+  }
+  
+  .searchIcon {
+    left: 10px;
+    z-index: 101;
   }
   
   .searchKbd {
@@ -131,7 +162,8 @@
   }
   
   .pageDate {
-    display: none; /* Hide date on mobile to save space */
+    display: block;
+    font-size: 0.65rem;
   }
   
   .headerActions {
