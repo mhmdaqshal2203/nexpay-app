@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { useTheme } from '@/context/ThemeContext';
-import { Sun, Moon } from '@phosphor-icons/react';
+import { Sun, Moon, Briefcase, Money, ChartBar } from '@phosphor-icons/react';
 import styles from './Login.module.css';
 
 export default function LoginPage() {
@@ -102,12 +102,12 @@ export default function LoginPage() {
 
             <div className={styles.brandFeatures}>
               {[
-                { icon: '💼', title: 'Manajemen Karyawan', desc: 'Kelola data lengkap seluruh karyawan' },
-                { icon: '💰', title: 'Kalkulasi Gaji Otomatis', desc: 'Hitung gaji, tunjangan & pajak PPh21' },
-                { icon: '📊', title: 'Laporan Real-time', desc: 'Dashboard analitik data penggajian' },
+                { icon: <Briefcase size={28} weight="duotone" color="#7c3aed" />, title: 'Manajemen Karyawan', desc: 'Kelola data lengkap seluruh karyawan', bg: 'rgba(124, 58, 237, 0.15)' },
+                { icon: <Money size={28} weight="duotone" color="#ec4899" />, title: 'Kalkulasi Gaji Otomatis', desc: 'Hitung gaji, tunjangan & pajak PPh21', bg: 'rgba(236, 72, 153, 0.15)' },
+                { icon: <ChartBar size={28} weight="duotone" color="#06b6d4" />, title: 'Laporan Real-time', desc: 'Dashboard analitik data penggajian', bg: 'rgba(6, 182, 212, 0.15)' },
               ].map((f, i) => (
                 <div key={i} className={styles.featureItem} style={{ animationDelay: `${0.2 + i * 0.1}s` }}>
-                  <span className={styles.featureIcon}>{f.icon}</span>
+                  <div className={styles.featureIcon} style={{ background: f.bg }}>{f.icon}</div>
                   <div>
                     <div className={styles.featureTitle}>{f.title}</div>
                     <div className={styles.featureDesc}>{f.desc}</div>
