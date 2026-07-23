@@ -65,6 +65,16 @@
   cursor: pointer;
 }
 
+.select option {
+  background: var(--surface-1, #1e1e2d);
+  color: var(--text-primary, #ffffff);
+}
+
+:global([data-theme="light"]) .select option {
+  background: #ffffff;
+  color: #333333;
+}
+
 .textarea {
   padding-left: 1rem; /* no icon for textarea */
   min-height: 100px;
