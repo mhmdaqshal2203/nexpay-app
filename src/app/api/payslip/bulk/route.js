@@ -17,37 +17,33 @@ export async function POST(request) {
       where: { month: month }
     });
 
-    // 2. Generate slip baru secara berurutan
+    // 2. Siapkan data untuk insert massal
     const now = new Date();
     const yyyy = now.getFullYear();
     const mm = String(now.getMonth() + 1).padStart(2, '0');
 
-    const createdPayslips = [];
-    
-    // Sort employees implicitly by their order in the array (which is mapped from UI)
-    let seqNumber = 1;
-    for (const slipData of payslips) {
-      const seq = String(seqNumber).padStart(3, '0');
+    const payslipsToInsert = payslips.map((slipData, index) => {
+      const seq = String(index + 1).padStart(3, '0');
       const slipCode = `SLP/${yyyy}/${mm}/${seq}`;
 
-      const created = await prisma.payslip.create({
-        data: {
-          employeeId: slipData.employeeId,
-          month: month,
-          gross: slipData.gross,
-          deduction: slipData.deduction,
-          net: slipData.net,
-          status: 'Dibayar',
-          slipCode: slipCode,
-        },
-        include: { employee: true }
-      });
+      return {
+        employeeId: slipData.employeeId,
+        month: month,
+        gross: slipData.gross,
+        deduction: slipData.deduction,
+        net: slipData.net,
+        status: 'Dibayar',
+        slipCode: slipCode,
+      };
+    });
 
-      createdPayslips.push(created);
-      seqNumber++;
-    }
+    // 3. Insert sekaligus untuk menghindari timeout
+    const created = await prisma.payslip.createMany({
+      data: payslipsToInsert,
+      skipDuplicates: true,
+    });
 
-    return NextResponse.json({ success: true, count: createdPayslips.length, payslips: createdPayslips }, { status: 201 });
+    return NextResponse.json({ success: true, count: created.count }, { status: 201 });
   } catch (error) {
     console.error('Error creating bulk payslips:', error);
     return NextResponse.json({ error: 'Failed to create payslips' }, { status: 500 });
