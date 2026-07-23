@@ -293,14 +293,7 @@ h1, h2, h3, h4, h5, h6 {
   background: rgba(255, 255, 255, 0.1);
   color: var(--text-primary);
   border-color: var(--glass-border-hover);
-}
-
-.btn-icon svg {
-  transition: transform 0.2s ease;
-}
-
-.btn-icon:hover svg {
-  transform: scale(1.15);
+  transform: scale(1.12);
 }
 
 /* ===================== INPUTS ===================== */
