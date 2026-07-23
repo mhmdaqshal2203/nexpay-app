@@ -236,12 +236,17 @@ function AdminPayslipView() {
 
   const handleGenerateAll = () => {
     employees.forEach(emp => {
+      const allowance = emp.salary * 0.20;
+      const gross = emp.salary + allowance;
+      const deduction = Math.round(gross * 0.05);
+      const net = gross - deduction;
+
       generatePayslip({
         employeeId: emp.id,
         month: 'Juli 2026',
-        gross: emp.salary + (emp.salary * 0.1),
-        deduction: Math.round(emp.salary * 0.05),
-        net: (emp.salary + (emp.salary * 0.1)) - Math.round(emp.salary * 0.05)
+        gross,
+        deduction,
+        net
       });
     });
     alert('Memproses Slip Gaji Juli 2026 untuk semua karyawan ke Neon DB...');
