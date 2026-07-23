@@ -154,8 +154,23 @@ export const ActivityProvider = ({ children }) => {
     }
   };
 
+  const generatePayslipBulk = async (month, payslipsData) => {
+    try {
+      const res = await fetch('/api/payslip/bulk', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ month, payslips: payslipsData })
+      });
+      if (res.ok) {
+        fetchActivities(); // Refresh payslips after bulk generation
+      }
+    } catch (err) {
+      console.error('Bulk generate payslips failed', err);
+    }
+  };
+
   return (
-    <ActivityContext.Provider value={{ attendances, checkIn, checkOut, resetAttendance, leaves, submitLeave, updateLeaveStatus, payslips, generatePayslip, refreshActivities: fetchActivities }}>
+    <ActivityContext.Provider value={{ attendances, checkIn, checkOut, resetAttendance, leaves, submitLeave, updateLeaveStatus, payslips, generatePayslip, generatePayslipBulk, refreshActivities: fetchActivities }}>
       {children}
     </ActivityContext.Provider>
   );

@@ -214,26 +214,34 @@ function EmployeePayslipView() {
 
 // Komponen Admin View
 function AdminPayslipView() {
-  const { payslips, generatePayslip } = useActivity();
+  const { payslips, generatePayslip, generatePayslipBulk } = useActivity();
   const { employees } = useEmployees();
   const [previewSlip, setPreviewSlip] = useState(null);
 
-  const handleGenerateAll = () => {
-    employees.forEach(emp => {
+  const handleGenerateAll = async () => {
+    // Sort employees to ensure deterministic order (e.g., by ID or Name)
+    const sortedEmployees = [...employees].sort((a, b) => a.id.localeCompare(b.id));
+
+    const bulkData = sortedEmployees.map(emp => {
       const allowance = emp.salary * 0.20;
       const gross = emp.salary + allowance;
       const deduction = Math.round(gross * 0.05);
       const net = gross - deduction;
 
-      generatePayslip({
+      return {
         employeeId: emp.id,
-        month: 'Juli 2026',
         gross,
         deduction,
         net
-      });
+      };
     });
-    alert('Memproses Slip Gaji Juli 2026 untuk semua karyawan ke Neon DB...');
+
+    try {
+      await generatePayslipBulk('Juli 2026', bulkData);
+      alert('Berhasil memproses dan mengurutkan ulang Slip Gaji Juli 2026 untuk semua karyawan!');
+    } catch (error) {
+      alert('Gagal memproses slip gaji');
+    }
   };
 
   const formatIDR = (val) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(val);
