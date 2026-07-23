@@ -222,8 +222,12 @@ function AdminPayslipView() {
   const { payslips, generatePayslip, generatePayslipBulk } = useActivity();
   const { employees } = useEmployees();
   const [previewSlip, setPreviewSlip] = useState(null);
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const handleGenerateAll = async () => {
+    if (isGenerating) return;
+    setIsGenerating(true);
+    
     // Preserve the original order of employees (typically by createdAt)
     // Muhammad Aqshal is first, Ali Fadli is second, etc.
     const bulkData = employees.map(emp => {
@@ -245,6 +249,8 @@ function AdminPayslipView() {
       alert('Berhasil memproses dan mengurutkan ulang Slip Gaji Juli 2026 untuk semua karyawan!');
     } catch (error) {
       alert('Gagal memproses slip gaji');
+    } finally {
+      setIsGenerating(false);
     }
   };
 
@@ -440,14 +446,15 @@ function AdminPayslipView() {
       <div className="glass-panel" style={{ padding: '2rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem' }}>
           <div>
-            <h2 className="section-title">Arsip Slip Gaji Karyawan</h2>
-            <p className="section-subtitle">Akses dan kelola seluruh arsip slip gaji</p>
+            <h2 className="section-title">Riwayat Slip Gaji</h2>
+            <p className="section-subtitle">Daftar slip gaji seluruh karyawan</p>
           </div>
           <button 
             onClick={handleGenerateAll}
-            style={{ padding: '0.5rem 1rem', borderRadius: '8px', border: 'none', background: 'var(--primary)', color: 'white', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontWeight: 'bold' }}
+            disabled={isGenerating}
+            style={{ padding: '0.5rem 1rem', borderRadius: '8px', border: 'none', background: 'var(--primary)', color: 'white', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: isGenerating ? 'not-allowed' : 'pointer', fontWeight: 'bold', opacity: isGenerating ? 0.7 : 1 }}
           >
-            <Printer size={18} /> Generate Slip Juli 2026
+            <Printer size={18} /> {isGenerating ? 'Memproses...' : 'Generate Slip Juli 2026'}
           </button>
         </div>
 
