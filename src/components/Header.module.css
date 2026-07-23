@@ -99,6 +99,9 @@
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
+  .header {
+    padding: 1rem 1.25rem;
+  }
   .leftWrapper {
     gap: 0.75rem;
   }
@@ -109,8 +112,12 @@
     justify-content: center;
   }
   
-  .searchBar {
-    display: none; /* Hide search bar on small screens to save space */
+  .searchWrapper {
+    display: none !important;
+  }
+  
+  .headerActions {
+    gap: 0.5rem;
   }
 }
 
