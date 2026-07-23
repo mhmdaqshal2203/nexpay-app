@@ -34,6 +34,7 @@ model Admin {
   id        String   @id @default(cuid())
   username  String   @unique
   password  String
+  name      String?
   avatar    String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -43,6 +44,7 @@ model Karyawan {
   id         String   @id @default(cuid())
   username   String   @unique
   password   String
+  name       String?
   avatar     String?
   employeeId String?  @unique
   employee   Employee? @relation(fields: [employeeId], references: [id])

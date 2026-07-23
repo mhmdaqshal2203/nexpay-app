@@ -334,7 +334,7 @@ export default function Header({ toggleSidebar }) {
           <Link href="/settings" className={styles.userProfile} title="Lihat Profil">
             <img src={user.avatar} alt={user.username} className={styles.userAvatar} />
             <div className={styles.userInfo}>
-              <span className={styles.userName}>{user.username}</span>
+              <span className={styles.userName}>{user.name || user.employee?.name || user.username}</span>
               <span className={styles.userRole}>{user.role}</span>
             </div>
           </Link>

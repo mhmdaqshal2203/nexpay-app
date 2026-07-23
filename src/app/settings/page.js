@@ -30,7 +30,7 @@ export default function SettingsPage() {
 
   // Profile form
   const [profileForm, setProfileForm] = useState({
-    displayName: user?.username || '',
+    displayName: user?.name || user?.employee?.name || user?.username || '',
     email: user?.username || '',
     avatar: user?.avatar || '',
   });
@@ -129,9 +129,28 @@ export default function SettingsPage() {
     setTimeout(() => setToast(null), 3000);
   };
 
-  const handleSave = (section) => {
+  const handleSave = async (section) => {
     if (section === 'Profil') {
-      updateUser({ username: profileForm.displayName });
+      try {
+        const res = await fetch('/api/user/profile', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            userId: user.id,
+            role: user.role,
+            name: profileForm.displayName
+          })
+        });
+        if (res.ok) {
+          updateUser({ name: profileForm.displayName });
+          showToast(`Pengaturan ${section} berhasil disimpan!`);
+        } else {
+          showToast('Gagal menyimpan profil', 'error');
+        }
+      } catch (err) {
+        showToast('Terjadi kesalahan', 'error');
+      }
+      return;
     }
     showToast(`Pengaturan ${section} berhasil disimpan!`);
   };

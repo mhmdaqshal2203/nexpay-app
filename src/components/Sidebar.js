@@ -122,7 +122,7 @@ export default function Sidebar({ isOpen, onClose }) {
             <div className={styles.onlineDot} />
           </div>
           <div className={styles.userInfo}>
-            <p className={styles.userName}>{user?.username || 'Admin HR'}</p>
+            <p className={styles.userName}>{user?.name || user?.employee?.name || user?.username || 'Admin HR'}</p>
             <p className={styles.userRole}>{user?.role || 'Administrator'}</p>
           </div>
           <button className={styles.logoutBtn} onClick={logout} title="Logout">
