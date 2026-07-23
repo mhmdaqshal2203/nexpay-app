@@ -113,7 +113,25 @@
   }
   
   .searchWrapper {
-    display: none !important;
+    display: flex;
+  }
+  
+  .searchInput {
+    width: 130px;
+    padding: 0.5rem 0.5rem 0.5rem 2rem;
+    font-size: 0.75rem;
+  }
+  
+  .searchInput:focus {
+    width: 160px;
+  }
+  
+  .searchKbd {
+    display: none;
+  }
+  
+  .pageDate {
+    display: none; /* Hide date on mobile to save space */
   }
   
   .headerActions {
