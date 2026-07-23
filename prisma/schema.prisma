@@ -82,5 +82,6 @@ model Payslip {
   deduction  Float
   net        Float
   status     String   @default("Dibayar")
+  slipCode   String?
   createdAt  DateTime @default(now())
 }

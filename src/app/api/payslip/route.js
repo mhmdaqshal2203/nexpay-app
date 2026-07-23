@@ -37,6 +37,19 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
+    // Generate proper slip ID format: SLP/YYYY/MM/NNN
+    const now = new Date();
+    const yyyy = now.getFullYear();
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+
+    const startOfMonth = new Date(yyyy, now.getMonth(), 1);
+    const endOfMonth = new Date(yyyy, now.getMonth() + 1, 0, 23, 59, 59);
+    const countThisMonth = await prisma.payslip.count({
+      where: { createdAt: { gte: startOfMonth, lte: endOfMonth } }
+    });
+    const seq = String(countThisMonth + 1).padStart(3, '0');
+    const slipCode = `SLP/${yyyy}/${mm}/${seq}`;
+
     const payslip = await prisma.payslip.create({
       data: {
         employeeId,
@@ -44,7 +57,8 @@ export async function POST(request) {
         gross,
         deduction,
         net,
-        status: 'Dibayar'
+        status: 'Dibayar',
+        slipCode,
       },
       include: { employee: true }
     });

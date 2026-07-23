@@ -48,7 +48,7 @@ function EmployeePayslipView() {
             </div>
             <div style={{ textAlign: 'right' }}>
               <h3 style={{ fontSize: '1.25rem', color: 'var(--text-primary)', margin: 0 }} className="print-text-dark">Periode: {selectedSlip.month}</h3>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginTop: '0.2rem' }} className="print-text-gray">ID Ref: {selectedSlip.id.substring(0, 8).toUpperCase()}-NX</p>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginTop: '0.2rem' }} className="print-text-gray">No. Slip: {selectedSlip.slipCode || selectedSlip.id.substring(0, 8).toUpperCase()}</p>
             </div>
           </div>
 
@@ -286,7 +286,7 @@ function AdminPayslipView() {
                 payslips.map((slip, i) => (
                   <tr key={i}>
                     <td><span style={{ fontWeight: '600' }}>{slip.month}</span></td>
-                    <td><code style={{ color: 'var(--primary-light)' }}>{slip.id.substring(0,8)}</code></td>
+                    <td><code style={{ color: 'var(--primary-light)', fontSize: '0.85rem', letterSpacing: '0.02em' }}>{slip.slipCode || `SLP/${new Date(slip.createdAt).getFullYear()}/${String(new Date(slip.createdAt).getMonth()+1).padStart(2,'0')}/—`}</code></td>
                     <td>{slip.employee?.name}</td>
                     <td style={{ fontWeight: '700', color: 'var(--success)' }}>{formatIDR(slip.net)}</td>
                     <td>
