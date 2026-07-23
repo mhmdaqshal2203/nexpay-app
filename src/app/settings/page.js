@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import {
   UserCircle,
@@ -34,6 +34,53 @@ export default function SettingsPage() {
     email: user?.username || '',
     avatar: user?.avatar || '',
   });
+  
+  const fileInputRef = useRef(null);
+  const [isUploading, setIsUploading] = useState(false);
+
+  const handleAvatarChange = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > 1 * 1024 * 1024) {
+      showToast('Ukuran file maksimal 1MB', 'error');
+      return;
+    }
+
+    try {
+      setIsUploading(true);
+      const reader = new FileReader();
+      
+      reader.onloadend = async () => {
+        const base64String = reader.result;
+        
+        const res = await fetch('/api/user/avatar', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            userId: user.id,
+            role: user.role,
+            avatar: base64String
+          })
+        });
+
+        if (res.ok) {
+          setProfileForm(prev => ({ ...prev, avatar: base64String }));
+          updateUser({ avatar: base64String });
+          showToast('Foto profil berhasil diperbarui!');
+        } else {
+          showToast('Gagal memperbarui foto profil', 'error');
+        }
+        setIsUploading(false);
+      };
+
+      reader.readAsDataURL(file);
+    } catch (error) {
+      console.error(error);
+      showToast('Terjadi kesalahan', 'error');
+      setIsUploading(false);
+    }
+  };
 
   // Password form
   const [passwordForm, setPasswordForm] = useState({
@@ -161,14 +208,28 @@ export default function SettingsPage() {
               {/* Avatar Section */}
               <div className={styles.avatarSection}>
                 <img 
-                  src={user?.avatar || profileForm.avatar} 
+                  src={profileForm.avatar || user?.avatar} 
                   alt="Avatar" 
                   className={styles.avatarPreview} 
+                  style={{ opacity: isUploading ? 0.5 : 1, transition: 'opacity 0.2s' }}
                 />
                 <div className={styles.avatarInfo}>
                   <h3 className={styles.avatarName}>{user?.username || 'User'}</h3>
                   <p className={styles.avatarRole}>{user?.role}</p>
-                  <button className={styles.avatarBtn}>Ganti Avatar</button>
+                  <input 
+                    type="file" 
+                    accept="image/*" 
+                    ref={fileInputRef} 
+                    style={{ display: 'none' }} 
+                    onChange={handleAvatarChange}
+                  />
+                  <button 
+                    className={styles.avatarBtn} 
+                    onClick={() => fileInputRef.current?.click()}
+                    disabled={isUploading}
+                  >
+                    {isUploading ? 'Mengunggah...' : 'Ganti Avatar'}
+                  </button>
                 </div>
               </div>
 
