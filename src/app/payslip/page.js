@@ -165,7 +165,12 @@ function EmployeePayslipView() {
           <p className="section-subtitle" style={{ marginBottom: '1.5rem' }}>12 bulan terakhir</p>
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxHeight: '600px', overflowY: 'auto', paddingRight: '0.5rem' }}>
-            {employeePayslips.map((slip, i) => (
+            {[...employeePayslips].sort((a, b) => {
+              if (a.month === b.month) {
+                return (a.slipCode || '').localeCompare(b.slipCode || '');
+              }
+              return new Date(b.createdAt) - new Date(a.createdAt);
+            }).map((slip, i) => (
               <div key={i} style={{ 
                 padding: '1.25rem', 
                 background: 'var(--surface-2)', 
@@ -465,7 +470,12 @@ function AdminPayslipView() {
                   <td colSpan="6" style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-secondary)' }}>Belum ada data slip gaji di database.</td>
                 </tr>
               ) : (
-                payslips.map((slip, i) => (
+                [...payslips].sort((a, b) => {
+                  if (a.month === b.month) {
+                    return (a.slipCode || '').localeCompare(b.slipCode || '');
+                  }
+                  return new Date(b.createdAt) - new Date(a.createdAt);
+                }).map((slip, i) => (
                   <tr key={i}>
                     <td><span style={{ fontWeight: '600' }}>{slip.month}</span></td>
                     <td><code style={{ color: 'var(--primary-light)', fontSize: '0.85rem', letterSpacing: '0.02em' }}>{slip.slipCode || `SLP/${new Date(slip.createdAt).getFullYear()}/${String(new Date(slip.createdAt).getMonth()+1).padStart(2,'0')}/—`}</code></td>
