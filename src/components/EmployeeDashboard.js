@@ -25,12 +25,16 @@ export default function EmployeeDashboard() {
   };
 
   // Employee data comes from the login response (Karyawan -> Employee relation)
-  const employeeData = currentUser.employee || {
+  const initialEmployeeData = currentUser.employee || {
     salary: 5000000,
     position: 'Staff',
     id: 'EMP-000',
     name: currentUser.username
   };
+
+  // Sync with live employees data to ensure status is always up to date
+  const employeeData = employees.find(emp => emp.id === initialEmployeeData.id) || initialEmployeeData;
+
 
   const { attendances } = useActivity();
   
