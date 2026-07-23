@@ -1,17 +1,16 @@
-// Script to backfill slipCode for existing payslips
+// Script to re-number slipCodes so newest slip = 001 (top of table)
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-async function backfillSlipCodes() {
-  // Get all payslips without a slipCode
+async function reorderSlipCodes() {
+  // Get all payslips ordered newest first (as shown in the table)
   const payslips = await prisma.payslip.findMany({
-    where: { slipCode: null },
-    orderBy: { createdAt: 'asc' }
+    orderBy: { createdAt: 'desc' }
   });
 
-  console.log(`Found ${payslips.length} payslips without slipCode`);
+  console.log(`Re-numbering ${payslips.length} payslips (newest = 001)...`);
 
-  // Group by year/month to assign sequential numbers
+  // Group by year/month
   const grouped = {};
   for (const slip of payslips) {
     const d = new Date(slip.createdAt);
@@ -22,6 +21,7 @@ async function backfillSlipCodes() {
 
   let updated = 0;
   for (const [key, slips] of Object.entries(grouped)) {
+    // slips are already in desc order (newest first), assign 001 to first
     for (let i = 0; i < slips.length; i++) {
       const seq = String(i + 1).padStart(3, '0');
       const slipCode = `SLP/${key}/${seq}`;
@@ -29,16 +29,16 @@ async function backfillSlipCodes() {
         where: { id: slips[i].id },
         data: { slipCode }
       });
-      console.log(`Updated ${slips[i].id} -> ${slipCode}`);
+      console.log(`${slips[i].id} -> ${slipCode}`);
       updated++;
     }
   }
 
-  console.log(`\nDone! Updated ${updated} payslips.`);
+  console.log(`\nDone! Re-numbered ${updated} payslips.`);
   await prisma.$disconnect();
 }
 
-backfillSlipCodes().catch(e => {
+reorderSlipCodes().catch(e => {
   console.error(e);
   prisma.$disconnect();
   process.exit(1);

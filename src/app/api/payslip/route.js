@@ -42,6 +42,7 @@ export async function POST(request) {
     const yyyy = now.getFullYear();
     const mm = String(now.getMonth() + 1).padStart(2, '0');
 
+    // Count all payslips this month to get next sequence number
     const startOfMonth = new Date(yyyy, now.getMonth(), 1);
     const endOfMonth = new Date(yyyy, now.getMonth() + 1, 0, 23, 59, 59);
     const countThisMonth = await prisma.payslip.count({
