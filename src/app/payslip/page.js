@@ -84,15 +84,11 @@ function EmployeePayslipView() {
             </div>
           </div>
 
-          {/* Calculations based on Indonesian Law */}
+          {/* Calculations based on Payroll Rules */}
           {(() => {
-            const gajiPokok = selectedSlip.employee?.salary || Math.round(selectedSlip.gross / 1.1);
+            const gajiPokok = selectedSlip.employee?.salary || Math.round(selectedSlip.gross / 1.2);
             const tunjangan = selectedSlip.gross - gajiPokok;
-            
-            const bpjsKes = Math.round(gajiPokok * 0.01); // 1%
-            const jht = Math.round(gajiPokok * 0.02); // 2%
-            const jp = Math.round(gajiPokok * 0.01); // 1%
-            const pph21 = selectedSlip.deduction - (bpjsKes + jht + jp); // Sisa dari potongan
+            const pph21 = selectedSlip.deduction;
             
             return (
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
@@ -108,7 +104,7 @@ function EmployeePayslipView() {
                       <span style={{ color: 'var(--text-primary)', fontWeight: '600' }} className="print-text-dark">{formatIDR(gajiPokok)}</span>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }} className="print-text-gray">Tunjangan Jabatan & Kehadiran</span>
+                      <span style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }} className="print-text-gray">Tunjangan (20%)</span>
                       <span style={{ color: 'var(--text-primary)', fontWeight: '600' }} className="print-text-dark">{formatIDR(tunjangan)}</span>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1rem', paddingTop: '1rem', borderTop: '2px dashed var(--glass-border)' }} className="print-border">
@@ -121,23 +117,11 @@ function EmployeePayslipView() {
                 {/* Potongan */}
                 <div>
                   <h4 style={{ color: 'var(--danger)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1.1rem', paddingBottom: '0.5rem', borderBottom: '2px solid rgba(244, 63, 94, 0.2)' }} className="print-color print-border">
-                    <Info size={22} weight="duotone" /> Rincian Potongan (Sesuai UU)
+                    <Info size={22} weight="duotone" /> Rincian Potongan
                   </h4>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }} className="print-text-gray">BPJS Kesehatan (1%)</span>
-                      <span style={{ color: 'var(--text-primary)', fontWeight: '600' }} className="print-text-dark">{formatIDR(bpjsKes)}</span>
-                    </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }} className="print-text-gray">Jamsostek JHT (2%)</span>
-                      <span style={{ color: 'var(--text-primary)', fontWeight: '600' }} className="print-text-dark">{formatIDR(jht)}</span>
-                    </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }} className="print-text-gray">Jamsostek JP (1%)</span>
-                      <span style={{ color: 'var(--text-primary)', fontWeight: '600' }} className="print-text-dark">{formatIDR(jp)}</span>
-                    </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }} className="print-text-gray">Pajak PPh 21</span>
+                      <span style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }} className="print-text-gray">Potongan Pajak PPh21 (5%)</span>
                       <span style={{ color: 'var(--text-primary)', fontWeight: '600' }} className="print-text-dark">{formatIDR(pph21)}</span>
                     </div>
                     
@@ -257,12 +241,9 @@ function AdminPayslipView() {
   const handlePrint = () => {
     const printWin = window.open('', '_blank', 'width=900,height=700');
     const slip = previewSlip;
-    const gajiPokok = slip.employee?.salary || Math.round(slip.gross / 1.1);
+    const gajiPokok = slip.employee?.salary || Math.round(slip.gross / 1.2);
     const tunjangan = slip.gross - gajiPokok;
-    const bpjsKes = Math.round(gajiPokok * 0.01);
-    const jht = Math.round(gajiPokok * 0.02);
-    const jp = Math.round(gajiPokok * 0.01);
-    const pph21 = slip.deduction - (bpjsKes + jht + jp);
+    const pph21 = slip.deduction;
     const fmtIDR = (v) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(v);
 
     printWin.document.write(`
@@ -313,15 +294,12 @@ function AdminPayslipView() {
         <div>
           <h4 class="income">💰 Rincian Pendapatan</h4>
           <div class="row"><span>Gaji Pokok</span><span>${fmtIDR(gajiPokok)}</span></div>
-          <div class="row"><span>Tunjangan Jabatan & Kehadiran</span><span>${fmtIDR(tunjangan)}</span></div>
+          <div class="row"><span>Tunjangan (20%)</span><span>${fmtIDR(tunjangan)}</span></div>
           <div class="total-row"><span>Total Pendapatan (A)</span><span style="color:#10b981">${fmtIDR(slip.gross)}</span></div>
         </div>
         <div>
-          <h4 class="deduct">📋 Rincian Potongan (UU)</h4>
-          <div class="row"><span>BPJS Kesehatan (1%)</span><span>${fmtIDR(bpjsKes)}</span></div>
-          <div class="row"><span>Jamsostek JHT (2%)</span><span>${fmtIDR(jht)}</span></div>
-          <div class="row"><span>Jamsostek JP (1%)</span><span>${fmtIDR(jp)}</span></div>
-          <div class="row"><span>Pajak PPh 21</span><span>${fmtIDR(pph21)}</span></div>
+          <h4 class="deduct">📋 Rincian Potongan</h4>
+          <div class="row"><span>Potongan Pajak PPh 21 (5%)</span><span>${fmtIDR(pph21)}</span></div>
           <div class="total-row"><span>Total Potongan (B)</span><span style="color:#f43f5e">${fmtIDR(slip.deduction)}</span></div>
         </div>
       </div>
