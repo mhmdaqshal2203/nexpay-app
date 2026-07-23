@@ -53,6 +53,12 @@
   -webkit-text-fill-color: transparent;
 }
 
+:global([data-theme="light"]) .welcomeTitle {
+  background: linear-gradient(135deg, #4c1d95, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .welcomeSub {
   color: var(--text-secondary);
   font-size: 0.95rem;
