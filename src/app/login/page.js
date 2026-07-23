@@ -3,11 +3,14 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
+import { useTheme } from '@/context/ThemeContext';
+import { Sun, Moon } from '@phosphor-icons/react';
 import styles from './Login.module.css';
 
 export default function LoginPage() {
   const router = useRouter();
   const { login, isAuthenticated, isLoading } = useAuth();
+  const { theme, toggleTheme } = useTheme();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -57,6 +60,15 @@ export default function LoginPage() {
 
   return (
     <div className={styles.loginPage}>
+      {/* Theme Toggle */}
+      <button 
+        onClick={toggleTheme} 
+        className={styles.themeToggle}
+        aria-label="Toggle theme"
+      >
+        {theme === 'dark' ? <Sun size={24} weight="fill" /> : <Moon size={24} weight="fill" />}
+      </button>
+
       {/* Animated background orbs */}
       <div className={styles.bgOrb1} />
       <div className={styles.bgOrb2} />

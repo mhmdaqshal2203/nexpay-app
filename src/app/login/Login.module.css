@@ -6,7 +6,37 @@
   align-items: stretch;
   position: relative;
   overflow: hidden;
-  background: #07090f;
+  background: var(--bg-body);
+}
+
+.themeToggle {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+}
+
+.themeToggle:hover {
+  transform: scale(1.15) rotate(15deg);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--glass-border-hover);
+  color: var(--warning);
+}
+
+:global([data-theme="light"]) .themeToggle:hover {
+  background: rgba(0, 0, 0, 0.05);
 }
 
 /* ---- Background Orbs ---- */
@@ -571,4 +601,84 @@
     padding: 1.75rem 1.25rem;
     border-radius: 20px;
   }
+}
+
+/* ==================== LIGHT THEME OVERRIDES ==================== */
+:global([data-theme="light"]) .brandPanel {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.05) 0%, rgba(236, 72, 153, 0.03) 50%, rgba(6, 182, 212, 0.03) 100%);
+  border-right: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+:global([data-theme="light"]) .brandName {
+  background: none;
+  -webkit-text-fill-color: initial;
+  color: var(--text-primary);
+}
+
+:global([data-theme="light"]) .brandTagline {
+  color: var(--text-secondary);
+}
+
+:global([data-theme="light"]) .featureItem {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+:global([data-theme="light"]) .featureTitle {
+  color: var(--text-primary);
+}
+
+:global([data-theme="light"]) .featureDesc {
+  color: var(--text-secondary);
+}
+
+:global([data-theme="light"]) .formPanel {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+:global([data-theme="light"]) .formCard {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.1);
+}
+
+:global([data-theme="light"]) .formTitle {
+  background: none;
+  -webkit-text-fill-color: initial;
+  color: var(--text-primary);
+}
+
+:global([data-theme="light"]) .formSubtitle {
+  color: var(--text-secondary);
+}
+
+:global([data-theme="light"]) .label {
+  color: var(--text-secondary);
+}
+
+:global([data-theme="light"]) .input {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: var(--text-primary);
+}
+
+:global([data-theme="light"]) .input:focus {
+  background: #fff;
+  border-color: rgba(124, 58, 237, 0.5);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
+}
+
+:global([data-theme="light"]) .eyeBtn:hover {
+  color: var(--text-primary);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+:global([data-theme="light"]) .errorMsg {
+  background: rgba(244, 63, 94, 0.1);
+  border-color: rgba(244, 63, 94, 0.2);
+  color: #e11d48;
+}
+
+:global([data-theme="light"]) .btnSubmit {
+  color: #fff;
 }
