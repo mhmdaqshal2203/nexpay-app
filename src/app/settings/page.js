@@ -228,7 +228,7 @@ export default function SettingsPage() {
                     onClick={() => fileInputRef.current?.click()}
                     disabled={isUploading}
                   >
-                    {isUploading ? 'Mengunggah...' : 'Ganti Avatar'}
+                    {isUploading ? 'Mengunggah...' : 'Ganti Foto Profil'}
                   </button>
                 </div>
               </div>
