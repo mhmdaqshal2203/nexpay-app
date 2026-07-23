@@ -1,0 +1,530 @@
+.settings {
+  padding-top: 1.75rem;
+}
+
+/* ===================== TOAST ===================== */
+.toast {
+  position: fixed;
+  top: calc(var(--header-height) + 1rem);
+  right: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.85rem;
+  font-weight: 500;
+  z-index: 999;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  animation: slideInRight 0.3s ease-out;
+}
+.toast.success {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: var(--success);
+}
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* ===================== PAGE HEADER ===================== */
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.75rem;
+}
+.pageTitle {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+.pageSubtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+}
+.roleBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: rgba(124, 58, 237, 0.12);
+  color: var(--primary-light);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+}
+
+/* ===================== CONTENT GRID ===================== */
+.contentGrid {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* ===================== TAB SIDEBAR ===================== */
+.tabSidebar {
+  padding: 0.75rem;
+}
+.tabNav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.tabBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+.tabBtn:hover {
+  background: var(--surface-hover);
+}
+.tabActive {
+  background: rgba(124, 58, 237, 0.12) !important;
+  border: 1px solid rgba(124, 58, 237, 0.2);
+}
+.tabActive .tabLabel {
+  color: var(--primary-light);
+}
+.tabActive .tabIconWrap {
+  color: var(--primary-light);
+}
+.tabIconWrap {
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+}
+.tabText {
+  display: flex;
+  flex-direction: column;
+}
+.tabLabel {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: color 0.2s;
+}
+.tabDesc {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+}
+
+/* ===================== TAB CONTENT ===================== */
+.tabContent {
+  padding: 1.75rem;
+  min-height: 480px;
+}
+.tabPanel {
+  animation: fadeIn 0.25s ease-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Panel Header */
+.panelHeader {
+  margin-bottom: 1.75rem;
+}
+.panelTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.panelDesc {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+}
+
+/* ===================== AVATAR SECTION ===================== */
+.avatarSection {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+.avatarPreview {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid rgba(124, 58, 237, 0.3);
+  box-shadow: 0 0 20px var(--primary-glow);
+  object-fit: cover;
+}
+.avatarInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.avatarName {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.avatarRole {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+.avatarBtn {
+  margin-top: 0.5rem;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--glass-border-hover);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: fit-content;
+}
+.avatarBtn:hover {
+  background: var(--surface-hover);
+  border-color: var(--primary-light);
+  color: var(--primary-light);
+}
+
+/* ===================== FORM STYLES ===================== */
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+.fullWidth {
+  grid-column: 1 / -1;
+}
+.formStack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.formLabel {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.formInput {
+  padding: 0.7rem 0.9rem;
+  background: var(--surface-2);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-sm);
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.2s;
+  width: 100%;
+}
+.formInput:focus {
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+}
+.formInput::placeholder {
+  color: var(--text-muted);
+}
+
+/* Password */
+.passwordWrap {
+  position: relative;
+}
+.passwordWrap .formInput {
+  padding-right: 3rem;
+}
+.passwordToggle {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  padding: 0.25rem;
+  transition: color 0.2s;
+}
+.passwordToggle:hover {
+  color: var(--primary-light);
+}
+
+/* Info Box */
+.infoBox {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1rem;
+  background: rgba(6, 182, 212, 0.08);
+  border: 1px solid rgba(6, 182, 212, 0.15);
+  border-radius: var(--border-radius-sm);
+  color: var(--accent);
+  font-size: 0.82rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Strength Bar */
+.strengthBar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+.strengthLabel {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+.strengthTrack {
+  flex: 1;
+  height: 6px;
+  background: var(--surface-2);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.strengthFill {
+  height: 100%;
+  border-radius: 999px;
+  transition: all 0.4s ease;
+}
+.strengthWeak { background: var(--danger); }
+.strengthMedium { background: var(--warning); }
+.strengthStrong { background: var(--success); }
+.strengthText {
+  font-size: 0.75rem;
+  font-weight: 600;
+  min-width: 40px;
+}
+
+/* ===================== CONFIG CARDS (Payroll) ===================== */
+.configGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.configCard {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--surface-2);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-sm);
+  transition: all 0.2s;
+}
+.configCard:hover {
+  border-color: var(--glass-border-hover);
+  background: var(--surface-hover);
+}
+.configIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.configInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.configLabel {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.configDesc {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+.configInput {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.formInputSmall {
+  width: 90px;
+  padding: 0.5rem 0.65rem;
+  background: var(--surface);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  font-family: inherit;
+  font-weight: 600;
+  text-align: right;
+  outline: none;
+  transition: all 0.2s;
+}
+.formInputSmall:focus {
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+}
+.inputSuffix, .inputPrefix {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* ===================== TOGGLE SWITCHES ===================== */
+.toggleList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.toggleItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background: var(--surface-2);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-sm);
+  transition: all 0.2s;
+}
+.toggleItem:hover {
+  border-color: var(--glass-border-hover);
+}
+.toggleInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.toggleLabel {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.toggleDesc {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* Custom Toggle Switch */
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 26px;
+  flex-shrink: 0;
+}
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.toggleSlider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--surface);
+  border: 1px solid var(--glass-border);
+  border-radius: 999px;
+  transition: 0.3s;
+}
+.toggleSlider::before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background: var(--text-secondary);
+  border-radius: 50%;
+  transition: 0.3s;
+}
+.toggle input:checked + .toggleSlider {
+  background: rgba(124, 58, 237, 0.25);
+  border-color: var(--primary-light);
+}
+.toggle input:checked + .toggleSlider::before {
+  transform: translateX(22px);
+  background: var(--primary-light);
+  box-shadow: 0 0 8px var(--primary-glow);
+}
+
+/* ===================== FORM ACTIONS ===================== */
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--glass-border);
+}
+.btnPrimary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.5rem;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border: none;
+  border-radius: var(--border-radius-sm);
+  color: white;
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.25s;
+  box-shadow: 0 4px 16px var(--primary-glow);
+}
+.btnPrimary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px var(--primary-glow);
+}
+.btnPrimary:active {
+  transform: scale(0.97);
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 768px) {
+  .contentGrid {
+    grid-template-columns: 1fr;
+  }
+  .tabSidebar {
+    order: -1;
+  }
+  .tabNav {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+  .tabBtn {
+    flex-shrink: 0;
+  }
+  .tabDesc {
+    display: none;
+  }
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+  .pageHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+}

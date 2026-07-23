@@ -1,0 +1,371 @@
+.page {
+  padding-top: 1.75rem;
+}
+
+/* ===================== PAGE HEADER ===================== */
+.pageHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+/* ===================== TOOLBAR ===================== */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.searchBox {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+  max-width: 420px;
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 0.875rem;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  padding: 0.7rem 2.5rem 0.7rem 2.5rem;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: rgba(124, 58, 237, 0.4);
+  background: rgba(124, 58, 237, 0.06);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+}
+
+.searchInput::placeholder { color: var(--text-muted); }
+
+.clearSearch {
+  position: absolute;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.75rem;
+  padding: 0.2rem;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.clearSearch:hover { color: var(--text-primary); }
+
+.toolbarRight {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-left: auto;
+}
+
+.countBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 0.5rem 0.875rem;
+}
+
+/* ===================== TABLE PANEL ===================== */
+.tablePanel {
+  overflow: hidden;
+}
+
+.tableRow {
+  transition: background 0.2s ease;
+}
+
+.rowNumber {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  width: 40px;
+}
+
+.empId {
+  font-size: 0.72rem;
+  background: rgba(124, 58, 237, 0.1);
+  color: var(--primary-light);
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  font-family: 'Courier New', monospace;
+  border: 1px solid rgba(124, 58, 237, 0.15);
+}
+
+.empName {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.empEmail {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 0.1rem;
+}
+
+.positionBadge {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  border-radius: 6px;
+  padding: 0.25rem 0.625rem;
+  white-space: nowrap;
+}
+
+.salaryCell {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+}
+
+.salaryValue {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.salaryPer {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+/* Action Buttons */
+.actionBtns {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.editBtn, .deleteBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0;
+}
+
+.editBtn {
+  background: rgba(124, 58, 237, 0.08);
+  color: var(--primary-light);
+  border-color: rgba(124, 58, 237, 0.15);
+}
+
+.editBtn:hover {
+  background: rgba(124, 58, 237, 0.2);
+  border-color: rgba(124, 58, 237, 0.35);
+  box-shadow: 0 0 12px rgba(124, 58, 237, 0.2);
+}
+
+.deleteBtn {
+  background: rgba(244, 63, 94, 0.07);
+  color: var(--danger);
+  border-color: rgba(244, 63, 94, 0.15);
+}
+
+.deleteBtn:hover {
+  background: rgba(244, 63, 94, 0.18);
+  border-color: rgba(244, 63, 94, 0.35);
+  box-shadow: 0 0 12px rgba(244, 63, 94, 0.2);
+}
+
+/* ===================== EMPTY STATE ===================== */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 2rem;
+  text-align: center;
+  gap: 1rem;
+}
+
+.emptyIcon {
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.emptyState h3 {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+}
+
+.emptyState p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  max-width: 280px;
+}
+
+/* ===================== FORM ===================== */
+.employeeForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 500px) {
+  .formGrid { grid-template-columns: 1fr; }
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formLabel {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.01em;
+}
+
+.required {
+  color: var(--danger);
+}
+
+.salaryInputWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.salaryPrefix {
+  position: absolute;
+  left: 0.875rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  pointer-events: none;
+}
+
+.salaryInput {
+  padding-left: 2.25rem !important;
+}
+
+.salaryPreview {
+  font-size: 0.75rem;
+  color: var(--primary-light);
+  margin-top: 0.25rem;
+}
+
+/* Calc Preview */
+.calcPreview {
+  background: rgba(124, 58, 237, 0.06);
+  border: 1px solid rgba(124, 58, 237, 0.15);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.calcTitle {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.75rem;
+}
+
+.calcRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  padding: 0.35rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.calcTotal {
+  border-bottom: none;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 0.35rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--glass-border);
+}
+
+.positive { color: var(--success); }
+.negative { color: var(--danger); }
+
+/* Modal Actions */
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+/* ===================== DELETE CONFIRM ===================== */
+.deleteConfirm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.875rem;
+  padding: 0.5rem 0 1rem;
+}
+
+.deleteIcon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(244, 63, 94, 0.12);
+  border: 1px solid rgba(244, 63, 94, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--danger);
+  margin-bottom: 0.25rem;
+}
+
+.deleteConfirm h3 {
+  font-size: 1.1rem;
+}
+
+.deleteConfirm p {
+  font-size: 0.83rem;
+  color: var(--text-secondary);
+  max-width: 300px;
+  line-height: 1.6;
+}
+
+.deleteActions {
+  display: flex;
+  gap: 0.875rem;
+  margin-top: 0.5rem;
+}

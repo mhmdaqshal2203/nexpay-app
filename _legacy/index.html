@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexPay - Web Penggajian Karyawan</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar glass-panel">
+            <div class="logo">
+                <i class="ph ph-wallet"></i>
+                <h2>NexPay</h2>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" data-target="dashboard">
+                    <i class="ph ph-squares-four"></i> Dashboard
+                </a>
+                <a href="#" class="nav-item" data-target="employees">
+                    <i class="ph ph-users"></i> Karyawan
+                </a>
+                <a href="#" class="nav-item" data-target="payroll">
+                    <i class="ph ph-calculator"></i> Penggajian
+                </a>
+            </nav>
+            <div class="user-profile">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Admin" alt="Admin Avatar" class="avatar">
+                <div class="user-info">
+                    <p class="name">Admin HR</p>
+                    <p class="role">Administrator</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <h1 id="page-title">Dashboard</h1>
+                <div class="header-actions">
+                    <div class="search-bar glass-input">
+                        <i class="ph ph-magnifying-glass"></i>
+                        <input type="text" placeholder="Cari data...">
+                    </div>
+                    <button class="btn-icon glass-btn"><i class="ph ph-bell"></i></button>
+                </div>
+            </header>
+
+            <!-- Dashboard View -->
+            <section id="dashboard" class="view-section active">
+                <div class="stats-grid">
+                    <div class="stat-card glass-panel">
+                        <div class="stat-icon purple-gradient">
+                            <i class="ph ph-users"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>Total Karyawan</h3>
+                            <p class="stat-value" id="stat-total-employees">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card glass-panel">
+                        <div class="stat-icon blue-gradient">
+                            <i class="ph ph-money"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>Estimasi Gaji Bulan Ini</h3>
+                            <p class="stat-value" id="stat-total-payroll">Rp 0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-section glass-panel">
+                    <div class="section-header">
+                        <h2>Karyawan Terbaru</h2>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="modern-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nama</th>
+                                    <th>Jabatan</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recent-employees-table">
+                                <!-- Data will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Employees View -->
+            <section id="employees" class="view-section">
+                <div class="section-header">
+                    <h2>Data Karyawan</h2>
+                    <button class="btn-primary" id="btn-add-employee">
+                        <i class="ph ph-plus"></i> Tambah Karyawan
+                    </button>
+                </div>
+                <div class="glass-panel">
+                    <div class="table-responsive">
+                        <table class="modern-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Profil</th>
+                                    <th>Jabatan</th>
+                                    <th>Gaji Pokok</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="employees-table">
+                                <!-- Data will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Payroll View -->
+            <section id="payroll" class="view-section">
+                <div class="section-header">
+                    <h2>Kalkulasi Gaji</h2>
+                </div>
+                <div class="glass-panel">
+                    <div class="table-responsive">
+                        <table class="modern-table">
+                            <thead>
+                                <tr>
+                                    <th>Karyawan</th>
+                                    <th>Gaji Pokok</th>
+                                    <th>Tunjangan (20%)</th>
+                                    <th>Potongan Pajak (5%)</th>
+                                    <th>Total Bersih</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="payroll-table">
+                                <!-- Data will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="employee-modal" class="modal-overlay">
+        <div class="modal-content glass-panel">
+            <div class="modal-header">
+                <h3 id="modal-title">Tambah Karyawan</h3>
+                <button class="btn-close" id="btn-close-modal"><i class="ph ph-x"></i></button>
+            </div>
+            <form id="employee-form">
+                <input type="hidden" id="emp-id">
+                <div class="form-group">
+                    <label>Nama Lengkap</label>
+                    <input type="text" id="emp-name" class="glass-input" required>
+                </div>
+                <div class="form-group">
+                    <label>Jabatan</label>
+                    <input type="text" id="emp-position" class="glass-input" required>
+                </div>
+                <div class="form-group">
+                    <label>Gaji Pokok (Rp)</label>
+                    <input type="number" id="emp-salary" class="glass-input" required min="0">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" id="btn-cancel-modal">Batal</button>
+                    <button type="submit" class="btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Payslip Modal -->
+    <div id="payslip-modal" class="modal-overlay">
+        <div class="modal-content payslip-card glass-panel">
+            <div class="modal-header">
+                <h3>Slip Gaji</h3>
+                <button class="btn-close" id="btn-close-payslip"><i class="ph ph-x"></i></button>
+            </div>
+            <div id="payslip-content">
+                <!-- Payslip details will be injected here -->
+            </div>
+            <div class="modal-actions" style="margin-top: 2rem;">
+                <button type="button" class="btn-primary" onclick="window.print()" style="width: 100%;"><i class="ph ph-printer"></i> Cetak Dokumen</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

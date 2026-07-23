@@ -1,0 +1,478 @@
+.dashboard {
+  padding-top: 1.75rem;
+}
+
+/* ===================== WELCOME BANNER ===================== */
+.welcomeBanner {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.15) 0%, rgba(236, 72, 153, 0.08) 100%);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  border-radius: var(--border-radius);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  backdrop-filter: blur(12px);
+}
+
+.welcomeLeft {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.welcomeIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 6px 20px var(--primary-glow);
+}
+
+.welcomeTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.welcomeSub {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 0.2rem;
+}
+
+.welcomePeriod {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ===================== STATS GRID ===================== */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+@media (max-width: 1200px) {
+  .statsGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.statCard {
+  position: relative;
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  border: 1px solid var(--glass-border);
+  overflow: hidden;
+  cursor: default;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.statCard:hover {
+  transform: translateY(-4px);
+}
+
+/* Gradient variants */
+.violet {
+  background: linear-gradient(145deg, rgba(124, 58, 237, 0.12) 0%, rgba(139, 92, 246, 0.05) 100%);
+  border-color: rgba(124, 58, 237, 0.2);
+}
+
+.violet:hover {
+  box-shadow: 0 12px 40px rgba(124, 58, 237, 0.2);
+}
+
+.cyan {
+  background: linear-gradient(145deg, rgba(6, 182, 212, 0.12) 0%, rgba(6, 182, 212, 0.04) 100%);
+  border-color: rgba(6, 182, 212, 0.2);
+}
+
+.cyan:hover {
+  box-shadow: 0 12px 40px rgba(6, 182, 212, 0.2);
+}
+
+.pink {
+  background: linear-gradient(145deg, rgba(236, 72, 153, 0.12) 0%, rgba(236, 72, 153, 0.04) 100%);
+  border-color: rgba(236, 72, 153, 0.2);
+}
+
+.pink:hover {
+  box-shadow: 0 12px 40px rgba(236, 72, 153, 0.2);
+}
+
+.amber {
+  background: linear-gradient(145deg, rgba(245, 158, 11, 0.12) 0%, rgba(245, 158, 11, 0.04) 100%);
+  border-color: rgba(245, 158, 11, 0.2);
+}
+
+.amber:hover {
+  box-shadow: 0 12px 40px rgba(245, 158, 11, 0.2);
+}
+
+.statCardTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.statIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.violetIcon { background: linear-gradient(135deg, #7c3aed, #8b5cf6); box-shadow: 0 6px 18px rgba(124,58,237,0.35); color: white; }
+.cyanIcon   { background: linear-gradient(135deg, #0891b2, #06b6d4); box-shadow: 0 6px 18px rgba(6,182,212,0.35); color: white; }
+.pinkIcon   { background: linear-gradient(135deg, #db2777, #ec4899); box-shadow: 0 6px 18px rgba(236,72,153,0.35); color: white; }
+.amberIcon  { background: linear-gradient(135deg, #d97706, #f59e0b); box-shadow: 0 6px 18px rgba(245,158,11,0.35); color: white; }
+
+.statTrend {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+}
+
+.trendUp {
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--success);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.trendDown {
+  background: rgba(244, 63, 94, 0.1);
+  color: var(--danger);
+  border: 1px solid rgba(244, 63, 94, 0.2);
+}
+
+.statValue {
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.statLabel {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.statSub {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+
+/* Orb decorative */
+.statOrb {
+  position: absolute;
+  bottom: -30px;
+  right: -30px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ===================== ANALYTICS GRID ===================== */
+.analyticsGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+@media (max-width: 1000px) {
+  .analyticsGrid { grid-template-columns: 1fr; }
+}
+
+.chartCard {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1rem;
+  height: 380px;
+}
+
+.chartContainer {
+  flex: 1;
+  width: 100%;
+  padding: 0 1rem 1rem 0;
+  min-height: 250px;
+}
+
+.emptyChart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  background: rgba(255,255,255,0.02);
+  border-radius: 12px;
+  margin: 0 1.5rem;
+}
+
+/* ===================== BOTTOM GRID ===================== */
+.bottomGrid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 1.25rem;
+}
+
+@media (max-width: 1100px) {
+  .bottomGrid { grid-template-columns: 1fr; }
+}
+
+/* Section Headers */
+.sectionHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem 1.5rem 0;
+}
+
+.recentSection {
+  padding-bottom: 0.5rem;
+}
+
+.viewAll {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--primary-light);
+  transition: gap 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+  padding-top: 0.25rem;
+}
+
+.viewAll:hover {
+  gap: 0.55rem;
+}
+
+.empId {
+  font-size: 0.72rem;
+  background: rgba(124, 58, 237, 0.1);
+  color: var(--primary-light);
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  font-family: 'Courier New', monospace;
+  border: 1px solid rgba(124, 58, 237, 0.15);
+}
+
+.positionBadge {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  border-radius: 6px;
+  padding: 0.25rem 0.625rem;
+}
+
+/* ===================== SUMMARY SECTION ===================== */
+.summarySection {
+  padding: 0 0 1.5rem;
+}
+
+.summaryItems {
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.summaryItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.summaryDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.summaryInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 1rem;
+}
+
+.summaryLabel {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.summaryValue {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.positive { color: var(--success) !important; }
+.negative { color: var(--danger) !important; }
+
+.summaryTotal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.summaryTotalLabel {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.summaryTotalValue {
+  font-size: 1.15rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary-light), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Payroll bar */
+.payrollBar {
+  margin: 1.25rem 1.5rem 0.5rem;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+
+.payrollBarFill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  transition: width 1s ease;
+}
+
+.payrollBarLabel {
+  padding: 0 1.5rem;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.fullWidthBtn {
+  margin: 0 1.5rem;
+  justify-content: center;
+  width: calc(100% - 3rem);
+}
+
+/* ===================== ACTIVITY GRID ===================== */
+.activityGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+@media (max-width: 900px) {
+  .activityGrid { grid-template-columns: 1fr; }
+}
+
+.activityList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0 1.5rem 1.5rem;
+}
+
+.activityItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background: var(--surface-2);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+}
+
+.activityInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.activityIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.iconSuccess { background: rgba(16, 185, 129, 0.15); color: var(--success); }
+.iconWarning { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+
+.activityName {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.activityDesc {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-top: 0.2rem;
+}
+
+.activityTime {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.actionBtn {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.btnApprove {
+  background: var(--primary);
+  color: white;
+}
+

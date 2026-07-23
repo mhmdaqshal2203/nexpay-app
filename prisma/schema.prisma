@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Employee {
+  id               String    @id
+  name             String
+  position         String
+  salary           Float
+  experience       Float?
+  performanceScore Int?
+  education        String?
+  department       String?
+  avatar           String?
+  status           String    @default("Aktif")
+  karyawan         Karyawan?
+  attendances      Attendance[]
+  leaves           Leave[]
+  payslips         Payslip[]
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+}
+
+model Admin {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  password  String
+  avatar    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Karyawan {
+  id         String   @id @default(cuid())
+  username   String   @unique
+  password   String
+  avatar     String?
+  employeeId String?  @unique
+  employee   Employee? @relation(fields: [employeeId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Attendance {
+  id         String   @id @default(cuid())
+  employeeId String
+  employee   Employee @relation(fields: [employeeId], references: [id])
+  date       String
+  time       String
+  checkOut   String?
+  status     String
+  createdAt  DateTime @default(now())
+}
+
+model Leave {
+  id         String   @id @default(cuid())
+  employeeId String
+  employee   Employee @relation(fields: [employeeId], references: [id])
+  type       String
+  startDate  String
+  endDate    String
+  reason     String
+  status     String   @default("Menunggu")
+  createdAt  DateTime @default(now())
+}
+
+model Payslip {
+  id         String   @id @default(cuid())
+  employeeId String
+  employee   Employee @relation(fields: [employeeId], references: [id])
+  month      String
+  gross      Float
+  deduction  Float
+  net        Float
+  status     String   @default("Dibayar")
+  createdAt  DateTime @default(now())
+}
