@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import Sidebar from '@/components/Sidebar';
@@ -10,6 +10,7 @@ export default function AppShell({ children }) {
   const { isAuthenticated, isLoading } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const isLoginPage = pathname === '/login';
 
@@ -49,9 +50,9 @@ export default function AppShell({ children }) {
 
   return (
     <div className="app-layout">
-      <Sidebar />
+      <Sidebar isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
       <main className="main-content">
-        <Header />
+        <Header toggleSidebar={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
         {children}
       </main>
     </div>

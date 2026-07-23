@@ -15,7 +15,7 @@ import {
 } from '@phosphor-icons/react';
 import styles from './Sidebar.module.css';
 
-export default function Sidebar() {
+export default function Sidebar({ isOpen, onClose }) {
   const pathname = usePathname();
   const { user, logout } = useAuth();
 
@@ -36,8 +36,10 @@ export default function Sidebar() {
       ];
 
   return (
-    <aside className={styles.sidebar}>
-      {/* Ambient glow effect */}
+    <>
+      {isOpen && <div className={styles.backdrop} onClick={onClose} />}
+      <aside className={`${styles.sidebar} ${isOpen ? styles.sidebarOpen : ''}`}>
+        {/* Ambient glow effect */}
       <div className={styles.ambientGlow} />
 
       {/* Logo */}
@@ -73,6 +75,7 @@ export default function Sidebar() {
             <Link
               key={item.path}
               href={item.path}
+              onClick={onClose}
               className={`${styles.navItem} ${isActive ? styles.active : ''}`}
             >
               {isActive && <div className={styles.activeIndicator} />}
@@ -93,6 +96,7 @@ export default function Sidebar() {
       <div className={styles.navMenu}>
         <Link
           href="/settings"
+          onClick={onClose}
           className={`${styles.navItem} ${pathname === '/settings' ? styles.active : ''}`}
         >
           {pathname === '/settings' && <div className={styles.activeIndicator} />}
@@ -127,5 +131,6 @@ export default function Sidebar() {
         </div>
       </div>
     </aside>
+    </>
   );
 }

@@ -2,13 +2,13 @@
 
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import { MagnifyingGlass, Bell, CaretRight, SignOut, Sun, Moon, X, CheckCircle, Clock, Warning, Receipt } from '@phosphor-icons/react';
+import { MagnifyingGlass, Bell, CaretRight, SignOut, Sun, Moon, X, CheckCircle, Clock, Warning, Receipt, List } from '@phosphor-icons/react';
 import { useAuth } from '@/context/AuthContext';
 import { useTheme } from '@/context/ThemeContext';
 import { useActivity } from '@/context/ActivityContext';
 import styles from './Header.module.css';
 
-export default function Header() {
+export default function Header({ toggleSidebar }) {
   const pathname = usePathname();
   const router = useRouter();
   const { user, logout } = useAuth();
@@ -158,7 +158,10 @@ export default function Header() {
 
   return (
     <header className={styles.header}>
-      <div className={styles.headerLeft}>
+      <div className={styles.leftSection}>
+        <button className={styles.mobileMenuBtn} onClick={toggleSidebar}>
+          <List size={24} weight="bold" />
+        </button>
         <div className={styles.breadcrumb}>
           <span className={styles.breadcrumbHome}>NexPay</span>
           {breadcrumb.map((crumb, i) => (

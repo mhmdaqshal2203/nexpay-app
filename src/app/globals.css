@@ -155,6 +155,16 @@ h1, h2, h3, h4, h5, h6 {
   gap: 1.75rem;
 }
 
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+  }
+  .page-content {
+    padding: 1.25rem 1rem;
+    gap: 1.25rem;
+  }
+}
+
 /* ===================== TYPOGRAPHY ===================== */
 .section-title {
   font-size: 1.5rem;

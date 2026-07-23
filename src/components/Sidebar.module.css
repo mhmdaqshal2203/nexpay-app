@@ -11,10 +11,10 @@
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border-right: 1px solid var(--glass-border);
-  z-index: 100;
+  z-index: 1000; /* Higher z-index to overlay header on mobile */
   overflow-x: hidden;
   overflow-y: auto;
-  transition: background 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease;
 }
 
 :global([data-theme="light"]) .sidebar {
@@ -196,6 +196,40 @@
   font-size: 0.875rem;
   font-weight: 600;
   line-height: 1.2;
+}
+
+.logoutDesc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Mobile Responsive */
+.backdrop {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 999;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    width: 280px;
+  }
+  
+  .sidebarOpen {
+    transform: translateX(0);
+    box-shadow: 4px 0 30px rgba(0, 0, 0, 0.6);
+  }
+  
+  .backdrop {
+    display: block;
+  }
 }
 
 .navDesc {
