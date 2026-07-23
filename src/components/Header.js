@@ -30,8 +30,9 @@ export default function Header({ toggleSidebar }) {
   const notifications = useMemo(() => {
     const list = [];
 
-    // Pending leave requests (admin only)
+    // Admin Notifications
     if (user?.role !== 'Karyawan') {
+      // Pending leave requests (admin only)
       leaves
         .filter(l => l.status === 'Menunggu')
         .slice(0, 5)
@@ -45,36 +46,84 @@ export default function Header({ toggleSidebar }) {
             link: '/leave',
           });
         });
+
+      // Late attendance
+      attendances
+        .filter(a => a.status === 'Terlambat')
+        .slice(0, 3)
+        .forEach(a => {
+          list.push({
+            id: `att-${a.id}`,
+            type: 'danger',
+            title: 'Absensi Terlambat',
+            desc: `${a.employeeName || 'Karyawan'} check-in pukul ${a.time}`,
+            time: a.date,
+            link: '/attendance',
+          });
+        });
+
+      // New payslips
+      payslips
+        .slice(0, 3)
+        .forEach(p => {
+          list.push({
+            id: `pay-${p.id}`,
+            type: 'success',
+            title: 'Slip Gaji Dibuat',
+            desc: `Slip gaji ${p.employeeName || 'Karyawan'} — ${p.period || p.month || ''}`,
+            time: p.createdAt || p.period,
+            link: '/payslip',
+          });
+        });
+    } else {
+      // Employee Notifications
+      const empId = user?.employee?.id || user?.id || user?.username;
+
+      // Leave updates (approved or rejected)
+      leaves
+        .filter(l => (l.status === 'Disetujui' || l.status === 'Ditolak') && (l.employeeId === empId || l.employee?.id === empId))
+        .slice(0, 3)
+        .forEach(l => {
+          list.push({
+            id: `leave-${l.id}-${l.status}`,
+            type: l.status === 'Disetujui' ? 'success' : 'danger',
+            title: `Cuti ${l.status}`,
+            desc: `Pengajuan cuti tanggal ${l.startDate} telah ${l.status.toLowerCase()}`,
+            time: l.updatedAt || l.createdAt || l.startDate,
+            link: '/leave',
+          });
+        });
+
+      // Own Late attendance
+      attendances
+        .filter(a => a.status === 'Terlambat' && (a.employeeId === empId || a.employee?.id === empId))
+        .slice(0, 3)
+        .forEach(a => {
+          list.push({
+            id: `att-${a.id}`,
+            type: 'danger',
+            title: 'Anda Terlambat',
+            desc: `Anda tercatat check-in pukul ${a.time}`,
+            time: a.date,
+            link: '/attendance',
+          });
+        });
+
+      // Own Payslips
+      payslips
+        .filter(p => p.employeeId === empId || p.employee?.id === empId)
+        .slice(0, 3)
+        .forEach(p => {
+          list.push({
+            id: `pay-${p.id}`,
+            type: 'success',
+            title: 'Slip Gaji Diterbitkan',
+            desc: `Slip gaji Anda periode ${p.period || p.month || ''} tersedia`,
+            time: p.createdAt || p.period,
+            link: '/payslip',
+          });
+        });
     }
-
-    // Late attendance
-    attendances
-      .filter(a => a.status === 'Terlambat')
-      .slice(0, 3)
-      .forEach(a => {
-        list.push({
-          id: `att-${a.id}`,
-          type: 'danger',
-          title: 'Absensi Terlambat',
-          desc: `${a.employeeName || 'Karyawan'} check-in pukul ${a.time}`,
-          time: a.date,
-          link: '/attendance',
-        });
-      });
-
-    // New payslips (last 3)
-    payslips
-      .slice(0, 3)
-      .forEach(p => {
-        list.push({
-          id: `pay-${p.id}`,
-          type: 'success',
-          title: 'Slip Gaji Dibuat',
-          desc: `Slip gaji ${p.employeeName || 'Karyawan'} — ${p.period || p.month || ''}`,
-          time: p.createdAt || p.period,
-          link: '/payslip',
-        });
-      });
 
     return list;
   }, [leaves, attendances, payslips, user]);
