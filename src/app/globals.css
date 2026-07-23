@@ -418,6 +418,21 @@ h1, h2, h3, h4, h5, h6 {
   border-bottom: none;
 }
 
+/* Mobile Responsive Tables */
+@media (max-width: 768px) {
+  div:has(> table),
+  .glass-card:has(table),
+  div[class*="tablePanel"] {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+  }
+  
+  .modern-table, .neon-table {
+    min-width: 600px; /* Ensure table doesn't squash, forces scroll */
+  }
+}
+
 /* ===================== AVATAR & BADGES ===================== */
 .avatar-cell {
   display: flex;
