@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nexus Payroll & Employee Management
 
-## Getting Started
+Nexus Payroll adalah aplikasi manajemen sumber daya manusia (HRIS) dan penggajian komprehensif berbasis web, yang dirancang khusus untuk mempermudah pengelolaan data karyawan, absensi, cuti, hingga slip gaji secara digital.
 
-First, run the development server:
+Aplikasi ini dibangun menggunakan teknologi modern untuk memberikan performa dan pengalaman pengguna terbaik (UI/UX yang responsif dan interaktif).
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Fitur Utama
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **👥 Manajemen Karyawan (Employee Data)**
+  - Sistem pencatatan data karyawan lengkap (Nama, Jabatan, Gaji Pokok, dsb).
+  - Penomoran ID Karyawan terstruktur (misal: `EMP-001`).
+- **📅 Sistem Absensi (Attendance)**
+  - Pencatatan Absen Masuk & Keluar secara real-time.
+  - Simulasi validasi lokasi & alamat IP.
+  - Tampilan rekap absensi untuk HR Admin.
+- **✈️ Pengajuan Cuti (Leave Management)**
+  - Fitur pengajuan cuti bagi karyawan (Cuti Tahunan, Sakit, dsb).
+  - Proses persetujuan (*Approval/Rejection*) oleh HR Admin.
+- **💰 Penggajian & Slip Gaji (Payroll)**
+  - Kalkulasi gaji otomatis (Gaji Pokok, Tunjangan, Potongan PPh 21, BPJS).
+  - *Take Home Pay* (THP) otomatis dihitung.
+  - Ekspor/Cetak Slip Gaji ke dalam format PDF yang rapi.
+- **🔐 Role-Based Access Control**
+  - **Admin HR:** Memiliki akses kelola penuh ke semua data.
+  - **Karyawan:** Hanya dapat mengakses data pribadi, melakukan absensi, mengajukan cuti, dan melihat riwayat slip gaji sendiri.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 🛠️ Teknologi yang Digunakan
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Frontend / Framework:** [Next.js (App Router)](https://nextjs.org/) & React
+- **Styling:** Vanilla CSS dengan sistem desain responsif (Glassmorphism UI)
+- **Icons:** [Phosphor Icons](https://phosphoricons.com/)
+- **Database / ORM:** [Prisma](https://www.prisma.io/)
+- **Database Engine:** PostgreSQL (Supabase / Neon DB)
 
-## Learn More
+## 📦 Cara Instalasi & Menjalankan (Local Development)
 
-To learn more about Next.js, take a look at the following resources:
+Ikuti langkah-langkah berikut untuk menjalankan project ini di komputer Anda:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Clone repository ini**
+   ```bash
+   git clone https://github.com/mhmdaqshal2203/nexpay-app.git
+   cd nexpay-app
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. **Install dependensi**
+   ```bash
+   npm install
+   ```
 
-## Deploy on Vercel
+3. **Konfigurasi Environment**
+   Pastikan Anda sudah memiliki file `.env` di root folder dengan variabel koneksi database:
+   ```env
+   DATABASE_URL="postgres://user:password@host:port/database"
+   DIRECT_URL="postgres://user:password@host:port/database"
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. **Migrasi Database & Seeding Data Awal**
+   Jalankan perintah ini untuk menyinkronkan skema database dan mengisi data *dummy* karyawan & admin:
+   ```bash
+   npm run db:push
+   npm run seed
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+5. **Jalankan Server Development**
+   ```bash
+   npm run dev
+   ```
+   Aplikasi akan berjalan di [http://localhost:3000](http://localhost:3000).
+
+## 🌍 Deployment
+
+Aplikasi ini dikonfigurasi untuk dapat dideploy dengan sangat mudah ke **Vercel**.
+Cukup hubungkan repository GitHub ini ke dashboard Vercel Anda, dan Vercel akan otomatis memproses deployment setiap kali ada pembaruan pada branch `main`.
+
+---
+*Dikembangkan untuk mempermudah HR dalam era digital.*
