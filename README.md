@@ -47,16 +47,24 @@ Ikuti langkah-langkah berikut untuk menjalankan project ini di komputer Anda:
    npm install
    ```
 
-3. **Konfigurasi Environment**
-   Pastikan Anda sudah memiliki file `.env` di root folder dengan variabel koneksi database:
-   ```env
-   DATABASE_URL="postgres://user:password@host:port/database"
-   DIRECT_URL="postgres://user:password@host:port/database"
-   ```
+3. **Pembuatan Database (Supabase / Neon DB)**
+   Karena aplikasi ini menggunakan PostgreSQL, Anda perlu membuat database terlebih dahulu:
+   - Buka [Supabase](https://supabase.com/) atau [Neon](https://neon.tech/) dan buat proyek baru.
+   - Pergi ke menu **Database** atau **Project Settings** > **Database** untuk menyalin string koneksi (Connection String).
 
-4. **Migrasi Database & Seeding Data Awal**
-   Jalankan perintah ini untuk menyinkronkan skema database dan mengisi data *dummy* karyawan & admin:
+4. **Konfigurasi Environment (`.env`)**
+   Buat file `.env` di root folder (bisa dengan mengubah file `.env.example` jika ada) dan masukkan URL koneksi database yang Anda dapatkan di langkah 3:
+   ```env
+   # Ganti dengan URL dari Supabase / Neon DB Anda
+   DATABASE_URL="postgresql://postgres.[project-ref]:[password]@aws-0-[region].pooler.supabase.com:6543/postgres?pgbouncer=true"
+   DIRECT_URL="postgresql://postgres.[project-ref]:[password]@aws-0-[region].pooler.supabase.com:5432/postgres"
+   ```
+   *(Catatan: `DIRECT_URL` biasanya diperlukan oleh Prisma jika Anda menggunakan Supabase dengan koneksi pooler pgbouncer)*
+
+5. **Migrasi Database & Seeding Data Awal**
+   Jalankan perintah ini untuk membuat tabel-tabel di database (berdasarkan skema Prisma) dan mengisi data *dummy* awal (Karyawan & Admin HR):
    ```bash
+   npx prisma generate
    npm run db:push
    npm run seed
    ```
