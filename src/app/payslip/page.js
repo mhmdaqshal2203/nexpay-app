@@ -464,6 +464,7 @@ function AdminPayslipView() {
               <tr>
                 <th>Bulan</th>
                 <th>No</th>
+                <th>ID Karyawan</th>
                 <th>Karyawan</th>
                 <th>Total Bersih (THP)</th>
                 <th>Status</th>
@@ -473,7 +474,7 @@ function AdminPayslipView() {
             <tbody>
               {payslips.length === 0 ? (
                 <tr>
-                  <td colSpan="6" style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-secondary)' }}>Belum ada data slip gaji di database.</td>
+                  <td colSpan="7" style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-secondary)' }}>Belum ada data slip gaji di database.</td>
                 </tr>
               ) : (
                 [...payslips].sort((a, b) => {
@@ -485,6 +486,7 @@ function AdminPayslipView() {
                   <tr key={i}>
                     <td><span style={{ fontWeight: '600' }}>{slip.month}</span></td>
                     <td><code style={{ color: 'var(--primary-light)', fontSize: '0.85rem', letterSpacing: '0.02em' }}>{i + 1}</code></td>
+                    <td><code style={{ color: 'var(--primary-light)', fontSize: '0.85rem', letterSpacing: '0.02em' }}>{slip.employee?.id || 'EMP-000'}</code></td>
                     <td>{slip.employee?.name}</td>
                     <td style={{ fontWeight: '700', color: 'var(--success)' }}>{formatIDR(slip.net)}</td>
                     <td>

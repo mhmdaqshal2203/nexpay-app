@@ -206,6 +206,7 @@ function AdminLeaveView() {
             <thead>
               <tr>
                 <th>No</th>
+                <th>ID Karyawan</th>
                 <th>Karyawan</th>
                 <th>Jenis Cuti</th>
                 <th>Tanggal</th>
@@ -217,12 +218,13 @@ function AdminLeaveView() {
             <tbody>
               {leaves.length === 0 ? (
                 <tr>
-                  <td colSpan="7" style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-secondary)' }}>Belum ada pengajuan cuti</td>
+                  <td colSpan="8" style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-secondary)' }}>Belum ada pengajuan cuti</td>
                 </tr>
               ) : (
                 leaves.map((req, i) => (
                   <tr key={i}>
                     <td><span style={{ color: 'var(--text-secondary)' }}>{i + 1}</span></td>
+                    <td><code style={{ color: 'var(--primary-light)' }}>{req.employee?.id || 'EMP-000'}</code></td>
                     <td style={{ fontWeight: '600', color: 'var(--text-primary)' }}>{req.employee?.name || req.name || 'Karyawan'}</td>
                     <td>{req.type}</td>
                     <td>{req.startDate} s/d {req.endDate}</td>

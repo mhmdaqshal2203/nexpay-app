@@ -173,6 +173,7 @@ function AdminAttendanceView() {
             <thead>
               <tr>
                 <th>No</th>
+                <th>ID Karyawan</th>
                 <th>Karyawan</th>
                 <th>Departemen</th>
                 <th>Absen Masuk</th>
@@ -184,7 +185,7 @@ function AdminAttendanceView() {
             <tbody>
               {attendances.length === 0 ? (
                 <tr>
-                  <td colSpan="7" style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-secondary)' }}>
+                  <td colSpan="8" style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-secondary)' }}>
                     Belum ada data absensi hari ini.
                   </td>
                 </tr>
@@ -192,6 +193,7 @@ function AdminAttendanceView() {
                 attendances.map((emp, i) => (
                   <tr key={i}>
                     <td><code style={{ color: 'var(--primary-light)' }}>{i + 1}</code></td>
+                    <td><code style={{ color: 'var(--primary-light)' }}>{emp.employee?.id || 'EMP-000'}</code></td>
                     <td style={{ fontWeight: '600', color: 'var(--text-primary)' }}>{emp.employee?.name || emp.name || 'Karyawan'}</td>
                     <td>{emp.employee?.position || emp.role || 'Karyawan'}</td>
                     <td><span style={{ padding: '0.2rem 0.5rem', background: 'rgba(16, 185, 129, 0.1)', color: 'var(--success)', borderRadius: '4px' }}>{emp.time}</span></td>
