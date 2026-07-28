@@ -205,7 +205,7 @@ function AdminLeaveView() {
           <table className="neon-table">
             <thead>
               <tr>
-                <th>ID</th>
+                <th>No</th>
                 <th>Karyawan</th>
                 <th>Jenis Cuti</th>
                 <th>Tanggal</th>
@@ -222,7 +222,7 @@ function AdminLeaveView() {
               ) : (
                 leaves.map((req, i) => (
                   <tr key={i}>
-                    <td><span style={{ color: 'var(--text-secondary)' }}>{req.id.substring(0, 8)}</span></td>
+                    <td><span style={{ color: 'var(--text-secondary)' }}>{i + 1}</span></td>
                     <td style={{ fontWeight: '600', color: 'var(--text-primary)' }}>{req.employee?.name || req.name || 'Karyawan'}</td>
                     <td>{req.type}</td>
                     <td>{req.startDate} s/d {req.endDate}</td>
